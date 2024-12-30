@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./../styles/App.css";
 
-
 const states = [{
 	name : "Madhya Pradesh",
 	description:"Madhya Pradesh, a large state in central India, retains landmarks from eras throughout Indian history.",
@@ -186,7 +185,7 @@ function App() {
 			  </option>
 			))}
 		  </select>
-		  <div id="city-name">{selectedCity.name}</div>
+		  <div id="city-title">{selectedCity.name}</div>
 		  <div id="city-description">{selectedCity.description}</div>
 		</div>
   
@@ -199,87 +198,13 @@ function App() {
 			  </option>
 			))}
 		  </select>
-		  <div id="landmark-name">{selectedLandmark.name}</div>
+		  <div id="landmark-title">{selectedLandmark.name}</div>
 		  <div id="landmark-description">{selectedLandmark.description}</div>
 		</div>
 	  </div>
 	);
   }
   export default App; 
-/*
-function App() {
-  const [selectedState, setSelectedState] = useState(states[0]);
-  const [selectedCity, setSelectedCity] = useState(states[0].city[0]);
-  const [selectedLandmark, setSelectedLandmark] = useState(states[0].city[0].landmarks[0]);
-
- 
-  const handleStateChange = (e) => {
-    const state = states.find((s) => s.name === e.target.value);
-    setSelectedState(state);
-    setSelectedCity(state.city[0]);
-    setSelectedLandmark(state.city[0].landmarks[0]);
-  };
-
-  
-  const handleCityChange = (e) => {
-    const city = selectedState.city.find((c) => c.name === e.target.value);
-    setSelectedCity(city);
-    setSelectedLandmark(city.landmarks[0]);
-  };
-
-  
-  const handleLandmarkChange = (e) => {
-    const landmark = selectedCity.landmarks.find((l) => l.name === e.target.value);
-    setSelectedLandmark(landmark);
-  };
-
-  return (
-    <div id="main">
-      <h1>Select State, City, and Landmark</h1>
-
-      <div>
-        <label htmlFor="state">State: </label>
-        <select id="state" onChange={handleStateChange} value={selectedState.name}>
-          {states.map((state) => (
-            <option key={state.name} value={state.name}>
-              {state.name}
-            </option>
-          ))}
-        </select>
-        <div id="state-name">{selectedState.name}</div>
-        <div id="state-description">{selectedState.description}</div>
-      </div>
-
-      <div>
-        <label htmlFor="city">City: </label>
-        <select id="city" onChange={handleCityChange} value={selectedCity.name}>
-          {selectedState.city.map((city) => (
-            <option key={city.name} value={city.name}>
-              {city.name}
-            </option>
-          ))}
-        </select>
-        <div id="city-name">{selectedCity.name}</div>
-        <div id="city-description">{selectedCity.description}</div>
-      </div>
-
-      <div>
-        <label htmlFor="landmark">Landmark: </label>
-        <select id="landmark" onChange={handleLandmarkChange} value={selectedLandmark.name}>
-          {selectedCity.landmarks.map((landmark) => (
-            <option key={landmark.name} value={landmark.name}>
-              {landmark.name}
-            </option>
-          ))}
-        </select>
-        <div id="landmark-name">{selectedLandmark.name}</div>
-        <div id="landmark-description">{selectedLandmark.description}</div>
-      </div>
-    </div>
-  );
-}
-
-export default App;
 
 
 /*import React, { useState } from "react";
