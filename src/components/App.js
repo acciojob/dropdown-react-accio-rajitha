@@ -1,3 +1,131 @@
+import React, { useState } from "react";
+import "./../styles/App.css";
+
+// The data for states, cities, and landmarks
+const states = [
+  {
+    name: "Madhya Pradesh",
+    description: "Madhya Pradesh, a large state in central India, retains landmarks from eras throughout Indian history.",
+    city: [
+      {
+        name: "Indore",
+        description: "Indore is a city in west-central India. It’s known for the 7-story Rajwada Palace and the Lal Baag Palace, which date back to Indore’s 19th-century Holkar dynasty.",
+        landmarks: [
+          {
+            name: "Mhow",
+            description: "Dr. Ambedkar Nagar, commonly known as Mhow, is a cantonment in the Indore district in Madhya Pradesh state of India. It is located 23 kilometres south-west of Indore city, towards Mumbai on the old Mumbai-Agra Road.",
+          },
+          {
+            name: "Dewas",
+            description: "Dewas is a city in the Malwa region of the Indian state of Madhya Pradesh. The municipality was formerly the seat of two princely states during the British Raj, Dewas Junior state and Dewas Senior state, ruled by the Puar clan of Maratha.",
+          },
+        ],
+      },
+      {
+        name: "Bhopal",
+        description: "Bhopal is a city in the central Indian state of Madhya Pradesh. It's one of India’s greenest cities. There are two main lakes, the Upper Lake and the Lower Lake.",
+        landmarks: [
+          {
+            name: "MANIT",
+            description: "Maulana Azad National Institute of Technology Bhopal is a public technical university located in Bhopal, Madhya Pradesh, India.",
+          },
+          {
+            name: "Berasia",
+            description: "Berasia is a landmark and a nagar palika in Bhopal district in the state of Madhya Pradesh, India.",
+          },
+        ],
+      },
+      {
+        name: "Gwalior",
+        description: "Gwalior is a city in the central Indian state of Madhya Pradesh. It's known for its palaces and temples, including the Sas Bahu Ka Mandir intricately carved Hindu temple.",
+        landmarks: [
+          {
+            name: "Ajaypur",
+            description: "Little less known city Ajaypur.",
+          },
+        ],
+      },
+    ],
+  },
+  // Add more states here (e.g., Jharkhand, Assam, etc.)
+];
+
+function App() {
+  const [selectedState, setSelectedState] = useState(states[0]);
+  const [selectedCity, setSelectedCity] = useState(states[0].city[0]);
+  const [selectedLandmark, setSelectedLandmark] = useState(states[0].city[0].landmarks[0]);
+
+  // Handle state change
+  const handleStateChange = (e) => {
+    const state = states.find((s) => s.name === e.target.value);
+    setSelectedState(state);
+    setSelectedCity(state.city[0]);
+    setSelectedLandmark(state.city[0].landmarks[0]);
+  };
+
+  // Handle city change
+  const handleCityChange = (e) => {
+    const city = selectedState.city.find((c) => c.name === e.target.value);
+    setSelectedCity(city);
+    setSelectedLandmark(city.landmarks[0]);
+  };
+
+  // Handle landmark change
+  const handleLandmarkChange = (e) => {
+    const landmark = selectedCity.landmarks.find((l) => l.name === e.target.value);
+    setSelectedLandmark(landmark);
+  };
+
+  return (
+    <div id="main">
+      <h1>Select State, City, and Landmark</h1>
+
+      <div>
+        <label htmlFor="state">State: </label>
+        <select id="state" onChange={handleStateChange} value={selectedState.name}>
+          {states.map((state) => (
+            <option key={state.name} value={state.name}>
+              {state.name}
+            </option>
+          ))}
+        </select>
+        <div id="state-name">{selectedState.name}</div>
+        <div id="state-description">{selectedState.description}</div>
+      </div>
+
+      <div>
+        <label htmlFor="city">City: </label>
+        <select id="city" onChange={handleCityChange} value={selectedCity.name}>
+          {selectedState.city.map((city) => (
+            <option key={city.name} value={city.name}>
+              {city.name}
+            </option>
+          ))}
+        </select>
+        <div id="city-name">{selectedCity.name}</div>
+        <div id="city-description">{selectedCity.description}</div>
+      </div>
+
+      <div>
+        <label htmlFor="landmark">Landmark: </label>
+        <select id="landmark" onChange={handleLandmarkChange} value={selectedLandmark.name}>
+          {selectedCity.landmarks.map((landmark) => (
+            <option key={landmark.name} value={landmark.name}>
+              {landmark.name}
+            </option>
+          ))}
+        </select>
+        <div id="landmark-name">{selectedLandmark.name}</div>
+        <div id="landmark-description">{selectedLandmark.description}</div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+
+/*
 import React, { useState,useReducer } from "react";
 import "./../styles/App.css";
 
@@ -150,3 +278,4 @@ function App()
 
 
 export default App;
+*/
