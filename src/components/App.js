@@ -1,5 +1,185 @@
 import React, { useState } from "react";
 import "./../styles/App.css";
+
+const states = [
+  {
+    name: "Madhya Pradesh",
+    description:
+      "Madhya Pradesh, a large state in central India, retains landmarks from eras throughout Indian history.",
+    city: [
+      {
+        name: "Indore",
+        description:
+          "Indore is a city in west-central India. It is known for the 7-story Rajwada Palace and the Lal Baag Palace, which date back to Indore's 19th-century Holkar dynasty.",
+        landmarks: [
+          {
+            name: "Mhow",
+            description:
+              "Dr. Ambedkar Nagar, commonly known as Mhow, is a cantonment in the Indore district in Madhya Pradesh state of India. It is located 23 kilometers southwest of Indore city, towards Mumbai on the old Mumbai-Agra Road.",
+          },
+          {
+            name: "Dewas",
+            description:
+              "Dewas is a city in the Malwa region of the Indian state of Madhya Pradesh. The municipality was formerly the seat of two princely states during the British Raj, Dewas Junior state and Dewas Senior state, ruled by the Puar clan of Maratha.",
+          },
+        ],
+      },
+      {
+        name: "Bhopal",
+        description:
+          "Bhopal is a city in the central Indian state of Madhya Pradesh. It's one of India’s greenest cities. There are two main lakes, the Upper Lake and the Lower Lake.",
+        landmarks: [
+          {
+            name: "MANIT",
+            description:
+              "Maulana Azad National Institute of Technology Bhopal is a public technical university located in Bhopal, Madhya Pradesh, India. It is part of a group of publicly funded institutions in India known as National Institutes of Technology.",
+          },
+          {
+            name: "Berasia",
+            description:
+              "Berasia is a landmark and a nagar palika in Bhopal district in the state of Madhya Pradesh, India.",
+          },
+        ],
+      },
+      {
+        name: "Gwalior",
+        description:
+          "Gwalior is a city in the central Indian state of Madhya Pradesh. It is known for its palaces and temples, including the Sas Bahu Ka Mandir intricately carved Hindu temple.",
+        landmarks: [
+          {
+            name: "Ajaypur",
+            description: "Best location for photoshoots.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Uttar Pradesh",
+    description:
+      "Uttar Pradesh is a northern state in India, known for its historical landmarks, including the Taj Mahal in Agra and the holy city of Varanasi.",
+    city: [
+      {
+        name: "Lucknow",
+        description:
+          "Lucknow is the capital city of Uttar Pradesh, known for its Mughal architecture, including the Bara Imambara.",
+        landmarks: [
+          {
+            name: "Rumi Darwaza",
+            description:
+              "Rumi Darwaza is a monumental gateway in Lucknow, considered an important example of Awadhi architecture.",
+          },
+          {
+            name: "Ambedkar Park",
+            description:
+              "Ambedkar Park in Lucknow is a public park with monumental statues, dedicated to the social reformer B. R. Ambedkar.",
+          },
+        ],
+      },
+      {
+        name: "Agra",
+        description:
+          "Agra is a city in northern India, famous for the Taj Mahal, a white marble mausoleum built by Mughal emperor Shah Jahan.",
+        landmarks: [
+          {
+            name: "Taj Mahal",
+            description:
+              "The Taj Mahal is a white marble mausoleum in Agra, India, built by Mughal emperor Shah Jahan in memory of his wife Mumtaz Mahal.",
+          },
+        ],
+      },
+      {
+        name: "Varanasi",
+        description:
+          "Varanasi, one of the oldest cities in the world, is located in Uttar Pradesh and is known for its ghats, temples, and spiritual significance.",
+        landmarks: [
+          {
+            name: "Kashi Vishwanath Temple",
+            description:
+              "The Kashi Vishwanath Temple in Varanasi is dedicated to Lord Shiva and is one of the twelve Jyotirlingas.",
+          },
+        ],
+      },
+    ],
+  },
+];
+
+function App() {
+  const [selectedState, setSelectedState] = useState(states[0]);
+  const [selectedCity, setSelectedCity] = useState(states[0].city[0]);
+  const [selectedLandmark, setSelectedLandmark] = useState(
+    states[0].city[0].landmarks[0]
+  );
+
+  const handleStateChange = (e) => {
+    const state = states.find((s) => s.name === e.target.value);
+    setSelectedState(state);
+    setSelectedCity(state.city[0]);
+    setSelectedLandmark(state.city[0].landmarks[0]);
+  };
+
+  const handleCityChange = (e) => {
+    const city = selectedState.city.find((c) => c.name === e.target.value);
+    setSelectedCity(city);
+    setSelectedLandmark(city.landmarks[0]);
+  };
+
+  const handleLandmarkChange = (e) => {
+    const landmark = selectedCity.landmarks.find((l) => l.name === e.target.value);
+    setSelectedLandmark(landmark);
+  };
+
+  return (
+    <div id="main">
+      <h1>Select State, City, and Landmark</h1>
+
+      <div>
+        <label htmlFor="state">State: </label>
+        <select id="state" onChange={handleStateChange} value={selectedState.name}>
+          {states.map((state) => (
+            <option key={state.name} value={state.name}>
+              {state.name}
+            </option>
+          ))}
+        </select>
+        <div id="state-title">{selectedState.name}</div>
+        <div id="state-description">{selectedState.description}</div>
+      </div>
+
+      <div>
+        <label htmlFor="city">City: </label>
+        <select id="city" onChange={handleCityChange} value={selectedCity.name}>
+          {selectedState.city.map((city) => (
+            <option key={city.name} value={city.name}>
+              {city.name}
+            </option>
+          ))}
+        </select>
+        <div id="city-title">{selectedCity.name}</div>
+        <div id="city-description">{selectedCity.description}</div>
+      </div>
+
+      <div>
+        <label htmlFor="landmark">Landmark: </label>
+        <select id="landmark" onChange={handleLandmarkChange} value={selectedLandmark.name}>
+          {selectedCity.landmarks.map((landmark) => (
+            <option key={landmark.name} value={landmark.name}>
+              {landmark.name}
+            </option>
+          ))}
+        </select>
+        <div id="landmark-title">{selectedLandmark.name}</div>
+        <div id="landmark-description">{selectedLandmark.description}</div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+/*
+import React, { useState } from "react";
+import "./../styles/App.css";
 const states = [
 	{
 	  name: "Madhya Pradesh",
@@ -324,7 +504,7 @@ const states = [{
       description:"Famous for its roasted seeds market.",
     }]
   }]
-}];*/
+}];
 function App() {
 	const [selectedState, setSelectedState] = useState(states[0]);
 	const [selectedCity, setSelectedCity] = useState(states[0].city[0]);
