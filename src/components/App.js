@@ -8,7 +8,7 @@ const states = [
 	  city: [
 		{
 		  name: "Indore",
-		  description: "Indore is a city in west-central India. It is known for the 7-story Rajwada Palace and the Lal Baag Palace, which date back to Indore's 19th-century Holkar dynasty.",
+		  description: "Indore is a city in west-central India. It's known for the 7-story Rajwada Palace and the Lal Baag Palace, which date back to Indore's 19th-century Holkar dynasty.",
 		 
 		  landmarks: [
 			{
